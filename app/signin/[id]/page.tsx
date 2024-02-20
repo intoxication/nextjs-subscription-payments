@@ -18,7 +18,11 @@ import UpdatePassword from '@/components/ui/AuthForms/UpdatePassword';
 import SignUp from '@/components/ui/AuthForms/Signup';
 
 // Create a separate component for the Sign in with Google button
-const GoogleSignInButton = ({ onClick }) => (
+interface GoogleSignInButtonProps {
+  onClick: () => void; // Specify the type for onClick prop
+}
+
+const GoogleSignInButton: React.FC<GoogleSignInButtonProps> = ({ onClick }) => (
   <button onClick={onClick}>Sign in with Google</button>
 );
 
