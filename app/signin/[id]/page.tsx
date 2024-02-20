@@ -105,13 +105,12 @@ export default async function SignIn({
                 {/* Add Gmail authentication */}
                 <button onClick={async () => {
                   try {
-                    const { user, session, error } = await supabase.auth.signInWithOAuth({
+                    const { session, error } = await supabase.auth.signInWithOAuth({
                       provider: 'google',
                     });
                     if (error) {
                       throw error;
                     }
-                    console.log('User:', user);
                     console.log('Session:', session);
                     // Handle successful sign-in
                   } catch (error) {
