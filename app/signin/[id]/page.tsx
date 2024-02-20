@@ -111,7 +111,7 @@ export default async function SignIn({
                     if (error) {
                       throw error;
                     }
-                    console.log('Session:', session);
+                    console.log('OAuth Session:', session);
                     // Handle successful sign-in
                   } catch (error) {
                     console.error('Google sign in error:', error.message);
