@@ -19,12 +19,37 @@ import SignUp from '@/components/ui/AuthForms/Signup';
 
 // Create a separate component for the Sign in with Google button
 interface GoogleSignInButtonProps {
-  onClick: () => void; // Specify the type for onClick prop
+  // No need to specify props here
 }
 
-const GoogleSignInButton: React.FC<GoogleSignInButtonProps> = ({ onClick }) => (
-  <button onClick={onClick}>Sign in with Google</button>
-);
+const GoogleSignInButton: React.FC<GoogleSignInButtonProps> = () => {
+  const handleClick = async () => {
+    try {
+      const supabase = createClient();
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          },
+        },
+      });
+      if (error) {
+        throw error;
+      }
+      console.log('OAuth Response:', data);
+      // Extract and store provider_token and provider_refresh_token if needed
+      // Handle successful sign-in
+    } catch (error: any) {
+      console.error('Google sign in error:', error.message);
+    }
+  };
+
+  return (
+    <button onClick={handleClick}>Sign in with Google</button>
+  );
+};
 
 export default async function SignIn({
   params,
@@ -112,27 +137,7 @@ export default async function SignIn({
                 <Separator text="Third-party sign-in" />
                 <OauthSignIn />
                 {/* Add Gmail authentication */}
-                <GoogleSignInButton onClick={async () => {
-                  try {
-                    const { data, error } = await supabase.auth.signInWithOAuth({
-                      provider: 'google',
-                      options: {
-                        queryParams: {
-                          access_type: 'offline',
-                          prompt: 'consent',
-                        },
-                      },
-                    });
-                    if (error) {
-                      throw error;
-                    }
-                    console.log('OAuth Response:', data);
-                    // Extract and store provider_token and provider_refresh_token if needed
-                    // Handle successful sign-in
-                  } catch (error: any) {
-                    console.error('Google sign in error:', error.message);
-                  }
-                }} />
+                <GoogleSignInButton />
               </>
             )}
         </Card>
