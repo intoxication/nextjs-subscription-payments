@@ -17,6 +17,11 @@ import ForgotPassword from '@/components/ui/AuthForms/ForgotPassword';
 import UpdatePassword from '@/components/ui/AuthForms/UpdatePassword';
 import SignUp from '@/components/ui/AuthForms/Signup';
 
+// Create a separate component for the Sign in with Google button
+const GoogleSignInButton = ({ onClick }) => (
+  <button onClick={onClick}>Sign in with Google</button>
+);
+
 export default async function SignIn({
   params,
   searchParams
@@ -103,7 +108,7 @@ export default async function SignIn({
                 <Separator text="Third-party sign-in" />
                 <OauthSignIn />
                 {/* Add Gmail authentication */}
-                <button onClick={async () => {
+                <GoogleSignInButton onClick={async () => {
                   try {
                     const { data, error } = await supabase.auth.signInWithOAuth({
                       provider: 'google',
@@ -123,7 +128,7 @@ export default async function SignIn({
                   } catch (error: any) {
                     console.error('Google sign in error:', error.message);
                   }
-                }}>Sign in with Google</button>
+                }} />
               </>
             )}
         </Card>
