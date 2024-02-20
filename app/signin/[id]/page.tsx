@@ -102,6 +102,8 @@ export default async function SignIn({
               <>
                 <Separator text="Third-party sign-in" />
                 <OauthSignIn />
+                {/* Add Gmail authentication */}
+                <button onClick={() => supabase.auth.signIn({ provider: 'google' })}>Sign in with Google</button>
               </>
             )}
         </Card>
