@@ -16,7 +16,6 @@ import OauthSignIn from '@/components/ui/AuthForms/OauthSignIn';
 import ForgotPassword from '@/components/ui/AuthForms/ForgotPassword';
 import UpdatePassword from '@/components/ui/AuthForms/UpdatePassword';
 import SignUp from '@/components/ui/AuthForms/Signup';
-import { google } from '@supabase/supabase-js'; // Import the google provider
 
 export default async function SignIn({
   params,
@@ -105,7 +104,7 @@ export default async function SignIn({
                 <OauthSignIn />
                 {/* Add Gmail authentication */}
                 <button onClick={async () => {
-                  const { user, session, error } = await supabase.auth.signIn({
+                  const { user, session, error } = await supabase.auth.signInWithOAuth({
                     provider: 'google',
                   });
                   if (error) {
