@@ -120,7 +120,7 @@ export default async function SignIn({
                     console.log('OAuth Response:', data);
                     // Extract and store provider_token and provider_refresh_token if needed
                     // Handle successful sign-in
-                  } catch (error) {
+                  } catch (error: any) {
                     console.error('Google sign in error:', error.message);
                   }
                 }}>Sign in with Google</button>
